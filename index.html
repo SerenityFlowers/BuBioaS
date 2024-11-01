@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支持多條件組合檢索的《廣韻》形聲考</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>支持多條件組合檢索的《廣韻》形聲考</h1>
+    <div class="search-container">
+        <table class="search-table">
+            <tr>
+                <td><label for="soundSymbolSearch">聲符包含：</label></td>
+                <td><input type="text" id="soundSymbolSearch" placeholder="輸入聲符關鍵字"></td>
+                <td><label for="soundDomainSearch">諧聲域包含：</label></td>
+                <td><input type="text" id="soundDomainSearch" placeholder="輸入聲域關鍵字"></td>
+            </tr>
+            <tr>
+                <td><label for="ancientSoundSearch">上古音Onset包含：</label></td>
+                <td><input type="text" id="ancientSoundSearch" placeholder="輸入上古聲關鍵字"></td>
+                <td><label for="ancientRhymeSearch">上古音Rhyme包含：</label></td>
+                <td><input type="text" id="ancientRhymeSearch" placeholder="輸入上古韻關鍵字"></td>
+            </tr>
+            <tr>
+                <td><label for="ancientPronunciationSearch">上古音音節包含：</label></td>
+                <td><input type="text" id="ancientPronunciationSearch" placeholder="輸入上古音關鍵字"></td>
+                <td><label for="medievalPronunciationSearch">切韻音韻地位包含：</label></td>
+                <td><input type="text" id="medievalPronunciationSearch" placeholder="輸入中古音關鍵字"></td>
+            </tr>
+            <tr>
+                <td><label for="spellSearch">切韻拼音包含：</label></td>
+                <td><input type="text" id="spellSearch" placeholder="輸入切拼關鍵字"></td>
+                <td><label for="characterSearch">字頭包含：</label></td>
+                <td><input type="text" id="characterSearch" placeholder="輸入字頭關鍵字"></td>
+            </tr>
+            <tr>
+                <td><label for="definitionSearch">釋義包含：</label></td>
+                <td colspan="3"><input type="text" id="definitionSearch" placeholder="輸入釋義關鍵字"></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="search-button-cell">
+                    <button onclick="filterEntries()">檢索</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: center; color: #666; font-size: 14px; padding-top: 10px;">
+                    使用説明：所有格子都是包含匹配；可以選填，不填默認匹配所有；諧聲域輸入大小寫都行；釋義爲程序自動匹配，很多《廣韻》中的字没匹配上釋義。
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <div id="entriesContainer"></div>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>
