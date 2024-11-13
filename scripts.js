@@ -39,20 +39,39 @@ function filterEntries() {
 
     // 篩選符合條件的條目
     let filteredEntries = data.filter(entry => {
-        const matchesDefinition = definitionKeyword
-            ? entry.釋義 && entry.釋義.toLowerCase().includes(definitionKeyword)
-            : true;
-
-        return (!soundSymbolKeyword || entry.聲符.toLowerCase().includes(soundSymbolKeyword)) &&
-               (!soundDomainKeyword || entry.聲域.toLowerCase().includes(soundDomainKeyword)) &&
-               (!ancientSoundKeyword || entry.上古聲.toLowerCase().includes(ancientSoundKeyword)) &&
-               (!ancientRhymeKeyword || entry.上古韻.toLowerCase().includes(ancientRhymeKeyword)) &&
-               (!ancientPronunciationKeyword || entry.上古音.toLowerCase().includes(ancientPronunciationKeyword)) &&
-               (!medievalPronunciationKeyword || entry.中古音.toLowerCase().includes(medievalPronunciationKeyword)) &&
-               (!spellKeyword || entry.切拼.toLowerCase().includes(spellKeyword)) &&
-               (!characterKeyword || entry.字.toLowerCase().includes(characterKeyword)) &&
-               matchesDefinition;
+        // 创建一个正则表达式，确保用户输入可以被转义并且不区分大小写
+        const createRegExp = (keyword) => {
+            try {
+                return new RegExp(keyword, 'i'); // 'i' 是不区分大小写的标志
+            } catch (e) {
+                console.error('Invalid regular expression:', keyword);
+                return null;
+            }
+        };
+    
+        // 将关键字转化为正则表达式
+        const definitionRegExp = definitionKeyword ? createRegExp(definitionKeyword) : null;
+        const soundSymbolRegExp = soundSymbolKeyword ? createRegExp(soundSymbolKeyword) : null;
+        const soundDomainRegExp = soundDomainKeyword ? createRegExp(soundDomainKeyword) : null;
+        const ancientSoundRegExp = ancientSoundKeyword ? createRegExp(ancientSoundKeyword) : null;
+        const ancientRhymeRegExp = ancientRhymeKeyword ? createRegExp(ancientRhymeKeyword) : null;
+        const ancientPronunciationRegExp = ancientPronunciationKeyword ? createRegExp(ancientPronunciationKeyword) : null;
+        const medievalPronunciationRegExp = medievalPronunciationKeyword ? createRegExp(medievalPronunciationKeyword) : null;
+        const spellRegExp = spellKeyword ? createRegExp(spellKeyword) : null;
+        const characterRegExp = characterKeyword ? createRegExp(characterKeyword) : null;
+    
+        // 过滤条目，使用正则表达式进行匹配
+        return (!soundSymbolKeyword || (soundSymbolRegExp && soundSymbolRegExp.test(entry.聲符))) &&
+               (!soundDomainKeyword || (soundDomainRegExp && soundDomainRegExp.test(entry.聲域))) &&
+               (!ancientSoundKeyword || (ancientSoundRegExp && ancientSoundRegExp.test(entry.上古聲))) &&
+               (!ancientRhymeKeyword || (ancientRhymeRegExp && ancientRhymeRegExp.test(entry.上古韻))) &&
+               (!ancientPronunciationKeyword || (ancientPronunciationRegExp && ancientPronunciationRegExp.test(entry.上古音))) &&
+               (!medievalPronunciationKeyword || (medievalPronunciationRegExp && medievalPronunciationRegExp.test(entry.中古音))) &&
+               (!spellKeyword || (spellRegExp && spellRegExp.test(entry.切拼))) &&
+               (!characterKeyword || (characterRegExp && characterRegExp.test(entry.字))) &&
+               (!definitionKeyword || (definitionRegExp && definitionRegExp.test(entry.釋義)));
     });
+    
 
     // 使用 Map 去重
     const uniqueEntriesMap = new Map();
