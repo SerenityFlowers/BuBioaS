@@ -1,0 +1,413 @@
+/* 重置默認樣式，確保跨瀏覽器一致性 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 全局樣式 */
+body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #f0f2f5 0%, #e6e9ef 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #2d3748;
+    font-size: 1rem;
+}
+
+/* 容器樣式 */
+.container {
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+/* 標題樣式 */
+h1 {
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+}
+
+/* 進度條容器 */
+.progress-container {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress-width, 0);
+    background: linear-gradient(90deg, #3182ce 0%, #2b6cb0 100%);
+    transition: width 0.3s ease;
+}
+
+#progress-text {
+    display: block;
+    font-size: 1rem;
+    color: #4a5568;
+    margin-top: 0.5rem;
+}
+
+/* 查詢表單容器（主界面方框） */
+#search-form {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: space-between;
+}
+
+#search-form:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* 查詢字段容器（每欄） */
+.search-field {
+    flex: 1 1 calc(50% - 1rem); /* 兩欄佈局，減去間距 */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 250px; /* 確保欄寬不過窄 */
+}
+
+/* 查詢字段標籤 */
+.search-field label {
+    width: 100px;
+    text-align: right;
+    font-size: 1rem;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+/* 查詢字段輸入框 */
+.search-field input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #2d3748;
+    background: #f7fafc;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-field input:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
+/* 按鈕樣式（查詢按鈕和返回按鈕共用） */
+button, .back-link {
+    display: block;
+    width: 150px; /* 從 200px 減小到 150px */
+    margin: 1rem auto;
+    padding: 0.5rem 1rem; /* 從 0.75rem 減小到 0.5rem 1rem */
+    background: #4a90e2; /* 淺化顏色，從深藍色漸變改為單色淺藍 */
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px; /* 從 8px 減小到 6px */
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled), .back-link:hover {
+    background: #357abd; /* 懸停時略深，但仍保持淺色調 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 減小陰影效果 */
+}
+
+button:active:not(:disabled), .back-link:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* 進一步減小陰影 */
+}
+
+/* 使用說明鏈接 */
+.instructions-link {
+    display: inline-block;
+    margin: 1rem 0;
+    color: #4a90e2; /* 與新按鈕顏色一致 */
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.instructions-link:hover {
+    color: #357abd; /* 與新按鈕懸停顏色一致 */
+    text-decoration: underline;
+}
+
+/* 使用說明頁面內容 */
+.instructions-content {
+    text-align: left;
+    margin-top: 1.5rem;
+}
+
+.instructions-content h2 {
+    font-size: 1.5rem;
+    color: #2b6cb0;
+    font-weight: 600;
+    margin: 2rem 0 1.5rem; /* 增加頂部間距，與卡片分隔 */
+}
+
+.instructions-content h3 {
+    font-size: 1.2rem;
+    color: #1a202c;
+    font-weight: 500;
+    margin: 1.5rem 0 0.75rem; /* 增加間距，與卡片分隔 */
+}
+
+.instructions-content .content-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 1rem; /* 卡片之間間距 */
+}
+
+.instructions-content .content-card p {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.instructions-content .content-card ul {
+    list-style: disc;
+    margin: 0.5rem 0 1rem 2rem;
+    padding: 0;
+}
+
+.instructions-content .content-card ul li {
+    font-size: 1rem;
+    color: #2d3748;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.instructions-content code {
+    background: #f7fafc;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #2b6cb0;
+}
+
+/* 結果頁面卡片樣式 */
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 0.75rem;
+    margin: 1rem 0;
+    border: 1px solid #e2e8f0;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+    font-size: 1.75rem;
+    color: #2b6cb0;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* 卡片字段容器（表頭式展示，兩欄） */
+.card .field-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 固定兩欄 */
+    gap: 0.2rem 0.5rem; /* 行間距 0.2rem，欄間距 0.5rem */
+    background: #f7fafc;
+    padding: 0.3rem;
+    border-radius: 8px;
+    border: 1px solid #edf2f7;
+}
+
+/* 卡片字段 */
+.card p {
+    font-size: 1rem;
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    line-height: 1.5; /* 行間距約 1.5 倍 */
+}
+
+.card p strong {
+    color: #1a202c;
+    font-weight: 600;
+    width: 80px; /* 標籤固定寬度，確保對齊 */
+}
+
+/* 釋義區域（紙張效果，左對齊） */
+.card .shiyi-group {
+    background: #ffffff;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-top: 0.5rem;
+    text-align: left;
+}
+
+.card .shiyi-group p {
+    font-size: 1rem;
+    color: #1a202c;
+    margin-bottom: 0.3rem;
+    line-height: 1.5; /* 行間距約 1.5 倍 */
+}
+
+.card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.card ul li {
+    font-size: 1rem;
+    color: #2d3748;
+    margin-bottom: 0.2rem;
+    line-height: 1.5; /* 行間距約 1.5 倍 */
+}
+
+/* 釋義來源信息 */
+.source-info {
+    display: none;
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.source-info.show {
+    display: inline;
+}
+
+/* 來源切換按鈕 */
+.toggle-source {
+    display: inline-block;
+    margin-top: 0.3rem;
+    padding: 0.25rem 0.75rem;
+    background: #edf2f7;
+    color: #3182ce;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.toggle-source:hover {
+    background: #e2e8f0;
+    color: #2b6cb0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 無結果提示 */
+#results p {
+    font-size: 1.1rem;
+    color: #e53e3e;
+    margin: 1rem 0;
+}
+
+/* 響應式設計 */
+@media (max-width: 900px) {
+    .search-field {
+        flex: 1 1 100%; /* 中屏幕單欄 */
+    }
+
+    .card .field-group {
+        grid-template-columns: 1fr; /* 字段切換為單欄 */
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    #search-form {
+        padding: 1.5rem;
+    }
+
+    .search-field {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-field label {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0.5rem;
+    }
+
+    .search-field input {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    button, .back-link {
+        width: 100%;
+    }
+
+    .card {
+        padding: 0.5rem;
+    }
+
+    .card .field-group {
+        padding: 0.3rem;
+    }
+
+    .card p strong {
+        width: auto; /* 小屏幕標籤自適應 */
+    }
+
+    .card .shiyi-group {
+        padding: 0.5rem;
+    }
+}
