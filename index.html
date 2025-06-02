@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《形聲考》組合檢索</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>《廣韻形聲考》組合檢索</h1>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <span id="progress-text">正在加載... 0%</span>
+        </div>
+        <form id="search-form">
+            <div class="search-field">
+                <label for="聲首">聲首:</label>
+                <input type="text" id="聲首" name="聲首" placeholder="聲首即聲符">
+            </div>
+            <div class="search-field">
+                <label for="諧聲域">諧聲域:</label>
+                <input type="text" id="諧聲域" name="諧聲域" placeholder="如PAK、AK、P等">
+            </div>
+            <div class="search-field">
+                <label for="上古聲">上古聲:</label>
+                <input type="text" id="上古聲" name="上古聲" placeholder="布表上古聲">
+            </div>
+            <div class="search-field">
+                <label for="上古韻">上古韻:</label>
+                <input type="text" id="上古韻" name="上古韻" placeholder="布表上古韻">
+            </div>
+            <div class="search-field">
+                <label for="上古音-參考">上古音（參考）:</label>
+                <input type="text" id="上古音-參考" name="上古音（參考）" placeholder="布表上古音參考">
+            </div>
+            <div class="search-field">
+                <label for="中古地位">中古地位:</label>
+                <input type="text" id="中古地位" name="中古地位" placeholder="布表音韻地位">
+            </div>
+            <div class="search-field">
+                <label for="切語">切語:</label>
+                <input type="text" id="切語" name="切語" placeholder="《廣韻》反切">
+            </div>
+            <div class="search-field">
+                <label for="切拼">切拼:</label>
+                <input type="text" id="切拼" name="切拼" placeholder="切韻拼音">
+            </div>
+            <div class="search-field">
+                <label for="字頭">字頭:</label>
+                <input type="text" id="字頭" name="字頭" placeholder="輸入字頭">
+            </div>
+            <div class="search-field">
+                <label for="釋義">釋義:</label>
+                <input type="text" id="釋義" name="釋義" placeholder="輸入釋義">
+            </div>
+            <button type="submit" disabled id="search-button">查詢</button>
+        </form>
+        <a href="instructions.html" class="instructions-link">使用說明</a>
+    </div>
+    <script src="js/search.js"></script>
+</body>
+</html>
