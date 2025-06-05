@@ -1,0 +1,268 @@
+/* -----------------------------------------------------------
+   1. 设计系统：变量、重置
+----------------------------------------------------------- */
+:root {
+  /* 色彩 */
+  --primary: #3498db;
+  --primary-hover: #2980b9;
+  --secondary: #2ecc71;
+
+  --bg-page: #f7f9fb;
+  --bg-card: #ffffff;
+
+  --text-main: #2c3e50;
+  --text-light: #6b7b8c;
+
+  /* 其他 */
+  --radius: 8px;
+  --speed: .2s;
+  --font: "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font);
+  background: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* -----------------------------------------------------------
+   2. 通用元素
+----------------------------------------------------------- */
+a,
+button,
+input[type="text"] {
+  transition: color var(--speed),
+              background-color var(--speed),
+              border-color var(--speed),
+              box-shadow var(--speed);
+}
+
+button,
+input[type="text"] {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: .5rem .75rem;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius);
+  color: var(--text-main);
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgb(52 152 219 / 20%);
+}
+
+/* 纯文字链接 / 按钮（使用 .plain）*/
+.plain,
+.plain:link,
+.plain:visited {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+.plain:hover { color: var(--primary-hover); text-decoration: underline; }
+
+/* 固定返回按钮 (← 返回检索)——支持 <a class="back-link"> 或 <button id="backButton"> */
+/* 裸文字样式统一：info-button, back-link, backButton */
+.info-button,
+.back-link,
+#backButton {
+  all: unset;                         /* 清除所有默认按钮/链接样式 */
+  font-size: 1rem;                    /* 字体大小一致 */
+  color: var(--primary-color);        /* 使用主题色 */
+  cursor: pointer;                    /* 鼠标悬停时变为手型 */
+  display: inline;                    /* 行内显示 */
+  text-decoration: none;              /* 去除下划线 */
+  transition: color var(--transition-speed); /* 添加悬停动画 */
+}
+
+/* 悬停状态：颜色变深，加下划线提示可点击 */
+.info-button:hover,
+.back-link:hover,
+#backButton:hover {
+  color: var(--primary-hover);        /* 悬停颜色加深 */
+  text-decoration: underline;         /* 悬停时显示下划线 */
+}
+
+/* -----------------------------------------------------------
+   3. 布局容器
+----------------------------------------------------------- */
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: .25rem;
+}
+
+/* -----------------------------------------------------------
+   4. 搜索区域
+----------------------------------------------------------- */
+.search-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  background: var(--bg-card);
+  padding: 1.5rem 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 5%);
+  margin-bottom: 2rem;
+}
+
+.form-group { display: flex; flex-direction: column; }
+.form-group.full-width { grid-column: 1 / -1; }
+
+.form-group label {
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+
+/* 提交按钮 */
+button[type="submit"] {
+  background: var(--primary);
+  color: #fff;
+  padding: .75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+}
+button[type="submit"]:hover { background: var(--primary-hover); }
+button[type="submit"]:disabled { background: #bdc3c7; cursor: not-allowed; }
+
+/* -----------------------------------------------------------
+   5. 进度条
+----------------------------------------------------------- */
+#progressContainer { margin: 1.5rem 0; }
+
+#progressBar {
+  width: 100%;
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+#progressFill {
+  height: 100%;
+  width: 0;
+  background: var(--primary);
+  border-radius: var(--radius);
+}
+
+/* -----------------------------------------------------------
+   6. 结果卡片
+----------------------------------------------------------- */
+#resultsContainer { margin-top: 3.5rem; }
+
+.char-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 5%);
+  transition: transform var(--speed), box-shadow var(--speed);
+}
+.char-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+}
+
+.card-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: .75rem;
+  color: var(--primary);
+}
+
+.card-info { display: grid; gap: .5rem; margin-bottom: 1rem; }
+.card-info p { display: flex; }
+.card-info strong { flex-shrink: 0; margin-right: .3em; white-space: nowrap; }
+.card-info span  { color: var(--text-light); word-break: break-word; font-size: .9rem; }
+
+/* 释义（shiyi） */
+.card-shiyi { margin-bottom: 1rem; }
+.card-shiyi p { font-weight: 600; margin-bottom: .5rem; }
+.card-shiyi ul { list-style: none; }
+.card-shiyi li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: .5rem .75rem;
+  margin-bottom: .5rem;
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius);
+}
+.shiyi-key { font-weight: 600; color: var(--primary); }
+.shiyi-val { flex: 1; color: var(--text-light); font-size: .9rem; }
+
+/* -----------------------------------------------------------
+   7. 使用说明页 (instructions.html)
+----------------------------------------------------------- */
+.instructions-content { margin-top: 1rem; }
+
+.content-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+  margin-bottom: 2rem;
+}
+.content-card h2       { font-size: 1.5rem; color: var(--primary); margin-bottom: .75rem; }
+.content-card h3       { font-size: 1.25rem; margin-bottom: .5rem; }
+.content-card p,
+.content-card li       { margin-bottom: .5rem; color: var(--text-main); line-height: 1.6; }
+.content-card ul       { list-style: disc inside; padding-left: 1.25rem; margin-bottom: 1rem; }
+
+/* -----------------------------------------------------------
+   8. 状态提示
+----------------------------------------------------------- */
+.error {
+  color: #e74c3c;
+  background: #fdecea;
+  border: 1px solid #f5c6cb;
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+/* -----------------------------------------------------------
+   9. 响应式
+----------------------------------------------------------- */
+@media (max-width: 600px) {
+  .card-info { grid-template-columns: 1fr; }
+}
+#backButton {
+  /* 保留你之前给它设置的所有字体、颜色、边框等样式 */
+  position: fixed;      /* 固定定位 */
+  bottom: 1rem;         /* 距离视口底部 1rem（根据需要自行调整） */
+  right: 1rem;          /* 距离视口右侧 1rem（根据需要自行调整） */
+  z-index: 1000;        /* 保证按钮浮在最上层 */
+}

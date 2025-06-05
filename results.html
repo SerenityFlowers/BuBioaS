@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>檢索結果</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>字典檢索結果</h1>
+    <button id="backButton">← 返回檢索</button>
+
+    <!-- 進度顯示區 -->
+    <div id="progressContainer">
+      <p>資料加載中，請稍候……</p>
+      <div id="progressBar">
+        <div id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- 最終結果將插入在此 -->
+    <div id="resultsContainer">
+      <div id="results"></div>
+    </div>
+  </div>
+
+  <script src="results.js"></script>
+</body>
+</html>

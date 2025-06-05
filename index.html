@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>形聲考組合檢索</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>《廣韻形聲考》組合檢索</h1>
+      <button class="info-button" onclick="location.href='instructions.html'">
+      使用說明</button>
+    </div>
+
+    <!-- 搜索表单：两列布局，钉住九个检索字段 -->
+    <form id="searchForm" class="search-form">
+      <!-- 左列，第1列 -->
+      <div class="form-group">
+        <label for="ziTou">字頭（完整或正則）</label>
+        <input type="text" id="ziTou" name="字頭" placeholder="輸入繁體字" />
+      </div>
+
+      <!-- 左列，第3行 -->
+      <div class="form-group">
+        <label for="xieShengYu">諧聲域</label>
+        <input type="text" id="xieShengYu" name="諧聲域" placeholder="例如：RUK~KRU" />
+      </div>
+            <!-- 右列，第2列 -->
+      <div class="form-group">
+        <label for="shengShou">聲首</label>
+        <input type="text" id="shengShou" name="聲首" placeholder="聲首==聲符" />
+      </div>
+      <!-- 右列，第3行 -->
+      <div class="form-group">
+        <label for="sgSheng">上古聲</label>
+        <input type="text" id="sgSheng" name="上古聲" placeholder="即onset，聲母+介音" />
+      </div>
+
+      <!-- 左列，第5行 -->
+      <div class="form-group">
+        <label for="sgYun">上古韻</label>
+        <input type="text" id="sgYun" name="上古韻" placeholder="rhyme，主元音+韻尾" />
+      </div>
+      <!-- 右列，第5行 -->
+      <div class="form-group">
+        <label for="sgRef">上古音（參考）</label>
+        <input type="text" id="sgRef" name="上古音（參考）" placeholder="例如：ruk" />
+      </div>
+
+      <!-- 左列，第7行 -->
+      <div class="form-group">
+        <label for="zgDiwei">中古地位</label>
+        <input type="text" id="zgDiwei" name="中古地位" placeholder="例如：來中三屋入" />
+      </div>
+      <!-- 右列，第7行 -->
+      <div class="form-group">
+        <label for="qieYu">切語</label>
+        <input type="text" id="qieYu" name="切語" placeholder="例如：許良" />
+      </div>
+
+      <!-- 左列，第9行 -->
+      <div class="form-group">
+        <label for="qiePin">切拼</label>
+        <input type="text" id="qiePin" name="切拼" placeholder="例如：luk" />
+      </div>
+      <!-- 右列，第9行：釋義 字段 -->
+      <div class="form-group full-width">
+        <label for="shiYi">釋義（僅匹配“鍵”）</label>
+        <input type="text" id="shiYi" name="釋義" placeholder="輸入繁體字；不支持轉换異體" />
+      </div>
+
+      <!-- 跨两列：开始检索按钮 -->
+      <div class="form-group full-width">
+        <button type="submit" id="searchButton">開始檢索</button>
+      </div>
+    </form>
+    有一些構字式和特殊符號尚未處理，請謹慎使用。比如“⿰黒汗〈䵦〉”，在逐字切分時，會把“黒”歸在WA聲域下！
+  </div>
+  
+  <script src="search.js"></script>
+</body>
+</html>
